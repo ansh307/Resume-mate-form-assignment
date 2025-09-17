@@ -4,8 +4,8 @@ export function generatePDF(data: {
   name: string;
   email: string;
   phone: string;
-  position: string;
-  description: string;
+  position?: string;
+  description?: string;
 }) {
   const doc = new jsPDF();
 
@@ -27,7 +27,7 @@ export function generatePDF(data: {
   addField("Name:", data.name);
   addField("Email:", data.email);
   addField("Phone:", data.phone);
-  addField("Position:", data.position);
+  addField("Position:", data?.position || "");
 
   // Description (inline with value)
   doc.setFont("helvetica", "bold");

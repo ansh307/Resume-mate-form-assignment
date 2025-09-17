@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { generatePDF } from "@/lib/generatePDF";
 import { useRef, useState } from "react";
-import { Phetsarath } from "next/font/google";
 import Button from "@/components/Button";
+import Image from "next/image";
 
 // Validation schema
 const schema = z.object({
@@ -22,7 +22,7 @@ const schema = z.object({
   description: z.string().optional(),
 });
 
-type FormData = z.infer<typeof schema>;
+export type FormData = z.infer<typeof schema>;
 
 export default function Form() {
   const router = useRouter();
@@ -79,7 +79,7 @@ export default function Form() {
           className="flex border border-gray-300 rounded-2xl items-center px-4 shadow-md cursor-text h-16"
           onClick={() => nameRef.current?.focus()}
         >
-          <img
+          <Image
             src="/icons/user.svg"
             alt="name"
             className="w-6 h-6 opacity-70"
@@ -121,7 +121,7 @@ export default function Form() {
           className="flex border border-gray-300 rounded-2xl items-center px-4 shadow-md cursor-text h-16  "
           onClick={() => emailRef.current?.focus()}
         >
-          <img
+          <Image
             src="/icons/mail.svg"
             alt="email"
             className="w-6 h-6 opacity-70"
@@ -171,7 +171,7 @@ export default function Form() {
           className="flex border border-gray-300 rounded-2xl items-center px-4 shadow-md cursor-text h-16  "
           onClick={() => phoneRef.current?.focus()}
         >
-          <img
+          <Image
             src="/icons/phone-call.svg"
             alt="phone"
             className="w-6 h-6 opacity-70"
@@ -221,7 +221,7 @@ export default function Form() {
           className="flex border border-gray-300 rounded-2xl items-center px-4 shadow-md cursor-text h-16  "
           onClick={() => positionRef.current?.focus()}
         >
-          <img
+          <Image
             src="/icons/position.svg"
             alt="position"
             className="w-6 h-6 opacity-70"
@@ -260,7 +260,7 @@ export default function Form() {
           className="flex border border-gray-300 rounded-2xl items-center px-4 shadow-md cursor-text h-16  "
           onClick={() => descriptionRef.current?.focus()}
         >
-          <img
+          <Image
             src="/icons/Description.svg"
             alt="description"
             className="w-6 h-6 opacity-70"
@@ -307,7 +307,7 @@ export default function Form() {
             onClick={handleSubmit((v) => onSubmit(v, "download"))}
             variant="blue"
           >
-            <img
+            <Image
               src="/icons/Download.svg"
               alt="download"
               className="w-6 h-6 opacity-70"
