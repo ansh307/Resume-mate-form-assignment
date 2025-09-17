@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { generatePDF } from "@/lib/generatePDF";
 import { useEffect, useRef, useState } from "react";
+import Button from "@/components/Button";
 
 export default function PreviewPage() {
   const router = useRouter();
@@ -50,24 +51,20 @@ export default function PreviewPage() {
       <iframe ref={iframeRef} className="w-full h-[500px] border mb-4" />
 
       <div className="flex gap-4">
-        <button
-          className="flex-1 flex items-center justify-center gap-2 px-4 py-2  
-                bg-gradient-to-r from-blue-500 to-blue-600 
-                text-white  rounded-lg shadow-md 
-                hover:from-blue-600 hover:to-blue-700 
-                transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
+        <Button
           onClick={() => {
             const pdf = generatePDF(data);
             pdf.save(getFileName());
           }}
+          variant="blue"
         >
           <img
             src="/icons/Download.svg"
             alt="download"
             className="w-6 h-6 opacity-70"
-          />{" "}
+          />
           Download PDF
-        </button>
+        </Button>
       </div>
     </div>
   );

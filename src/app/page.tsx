@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { generatePDF } from "@/lib/generatePDF";
 import { useRef, useState } from "react";
 import { Phetsarath } from "next/font/google";
+import Button from "@/components/Button";
 
 // Validation schema
 const schema = z.object({
@@ -107,10 +108,12 @@ export default function Form() {
               onBlur={() => setActiveField(null)}
               className="w-full py-1 focus:outline-none focus:ring-0 active:ring-0 "
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name.message}</p>
-            )}
           </div>
+          {errors.name && (
+            <p className="text-red-500 text-xs whitespace-nowrap ">
+              {errors.name.message}
+            </p>
+          )}
         </div>
 
         {/* Email */}
@@ -155,10 +158,12 @@ export default function Form() {
               onBlur={() => setActiveField(null)}
               className="w-full py-1 focus:outline-none focus:ring-0 active:ring-0"
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
           </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs whitespace-nowrap">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
         {/* Phone */}
@@ -203,10 +208,12 @@ export default function Form() {
               onBlur={() => setActiveField(null)}
               className="w-full py-1 focus:outline-none focus:ring-0 active:ring-0"
             />
-            {errors.phone && (
-              <p className="text-red-500 text-sm">{errors.phone.message}</p>
-            )}
           </div>
+          {errors.phone && (
+            <p className="text-red-500 text-xs whitespace-nowrap">
+              {errors.phone.message}
+            </p>
+          )}
         </div>
 
         {/* Position */}
@@ -289,34 +296,24 @@ export default function Form() {
 
         {/* Buttons */}
         <div className="flex gap-4 mt-4">
-          <button
-            type="button"
+          <Button
             onClick={handleSubmit((v) => onSubmit(v, "preview"))}
-            className="flex-1 flex items-center justify-center gap-2 
-                bg-gradient-to-r from-blue-500 to-blue-600 
-                text-white py-2 rounded-lg shadow-md 
-                hover:from-blue-600 hover:to-blue-700 
-                transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
+            variant="blue"
           >
             View PDF
-          </button>
+          </Button>
 
-          <button
-            type="button"
+          <Button
             onClick={handleSubmit((v) => onSubmit(v, "download"))}
-            className="flex-1 flex items-center justify-center gap-2 
-                bg-gradient-to-r from-blue-600 to-blue-700 
-                text-white py-2 rounded-lg shadow-md 
-                hover:from-blue-700 hover:to-blue-800 
-                transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
+            variant="blue"
           >
             <img
               src="/icons/Download.svg"
               alt="download"
               className="w-6 h-6 opacity-70"
-            />{" "}
+            />
             Download PDF
-          </button>
+          </Button>
         </div>
       </form>
     </div>
