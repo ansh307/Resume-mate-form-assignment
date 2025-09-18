@@ -70,7 +70,7 @@ export default function Form() {
     }
   };
 
-  const handleRandomUser = async (e: any) => {
+  const handleRandomUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
