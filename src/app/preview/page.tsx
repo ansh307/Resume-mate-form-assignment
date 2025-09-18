@@ -67,6 +67,8 @@ export default function PreviewPage() {
           <Image
             src="/icons/Download.svg"
             alt="download"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           Download PDF

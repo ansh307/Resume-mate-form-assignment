@@ -1,11 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { FormSubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { generatePDF } from "@/lib/generatePDF";
-import { useRef, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import Button from "@/components/Button";
 import Image from "next/image";
 
@@ -39,6 +39,7 @@ export default function Form() {
     reset,
     watch,
     formState: { errors },
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -69,6 +70,34 @@ export default function Form() {
     }
   };
 
+  const handleRandomUser = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("https://dummyjson.com/users");
+
+      if (!res.ok) {
+        console.log("err");
+      }
+
+      const jsonData = await res.json();
+
+      if (jsonData.users.length > 0) {
+        const randIndex = Math.floor(Math.random() * jsonData.users.length);
+        const { firstName, lastName, email } = jsonData.users[randIndex];
+
+        setValue("name", `${firstName} ${lastName}`);
+        setValue("email", email);
+
+        console.log(`Picked User: ${firstName} ${lastName} (${email})`);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      console.log("Done");
+    }
+  };
+
   return (
     <div className="max-w-xl mx-auto mt-10 p-6  bg-white">
       <h1 className="text-2xl font-bold text-center mb-6">Add Your details</h1>
@@ -82,6 +111,8 @@ export default function Form() {
           <Image
             src="/icons/user.svg"
             alt="name"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           <div className="w-full pl-5">
@@ -124,6 +155,8 @@ export default function Form() {
           <Image
             src="/icons/mail.svg"
             alt="email"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           <div className="w-full pl-5">
@@ -174,6 +207,8 @@ export default function Form() {
           <Image
             src="/icons/phone-call.svg"
             alt="phone"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           <div className="w-full pl-5">
@@ -224,6 +259,8 @@ export default function Form() {
           <Image
             src="/icons/position.svg"
             alt="position"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           <div className="w-full pl-5">
@@ -263,6 +300,8 @@ export default function Form() {
           <Image
             src="/icons/Description.svg"
             alt="description"
+            width={6}
+            height={6}
             className="w-6 h-6 opacity-70"
           />
           <div className="w-full pl-5">
@@ -310,10 +349,17 @@ export default function Form() {
             <Image
               src="/icons/Download.svg"
               alt="download"
+              width={6}
+              height={6}
               className="w-6 h-6 opacity-70"
             />
             Download PDF
           </Button>
+
+          <Button variant="blue" onClick={handleRandomUser}>
+            random user
+          </Button>
+          {/* new button random user */}
         </div>
       </form>
     </div>
